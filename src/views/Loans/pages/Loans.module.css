@@ -1,0 +1,9 @@
+.screen-title {
+    padding-top: 80px;
+    font-size: 2em;
+    font-weight: bolder;
+    margin-bottom: 45px;
+    color: #232C4B;
+    justify-content: center;
+    display: flex;
+}

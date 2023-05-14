@@ -1,0 +1,51 @@
+.custom-actions-cells {
+    min-width: 200px !important;
+    justify-content: end !important;
+}
+
+.custom-name-cells {
+    width: 300px !important;
+    min-width: 150px !important;
+    max-width: none !important;
+}
+
+.custom-city-cells {
+    width: 200px !important;
+    min-width: 150px !important;
+    max-width: none !important;
+}
+
+.custom-postalCode-cells {
+    width: 200px !important;
+    min-width: 150px !important;
+    max-width: none !important;
+}
+.custom-street-cells {
+    width: 450px !important;
+    min-width: 150px !important;
+    max-width: none !important;
+}
+.custom-number-cells {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: none !important;
+}
+
+.custom-button {
+    background-color: transparent !important;
+    width: 20px !important;
+    color: #232c4b !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    display: contents !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.render-button-strong {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.datagrid-div {
+    margin-top: 10px;
+}

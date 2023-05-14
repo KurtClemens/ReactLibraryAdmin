@@ -1,0 +1,19 @@
+.screen-title {
+    padding-top: 80px;
+    font-size: 2em;
+    font-weight: bolder;
+    color: #232C4B;
+    justify-content: center;
+    display: flex;
+}
+
+.button-top-right-above-card {
+    display: flex;
+    justify-content: right;
+    padding-bottom: 4px;
+}
+
+.card-button {
+    color: #fff !important;
+    background-color: #232c4b !important;
+}

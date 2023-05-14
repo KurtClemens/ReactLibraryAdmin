@@ -1,0 +1,28 @@
+{
+    "links":[
+        {
+            "label":"Home",
+            "href":"/home"
+        },
+        {
+            "label":"Books",
+            "href":"/books"
+        },        
+        {
+            "label":"Users",
+            "href":"/users"
+        },
+        {
+            "label":"Loans",
+            "href":"/loans"
+        },
+        {
+            "label":"Offices",
+            "href":"/offices"
+        },
+        {
+            "label":"Requests",
+            "href":"/requests"
+        }
+    ]
+}

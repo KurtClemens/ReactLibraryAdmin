@@ -1,0 +1,22 @@
+.grid-container{
+    justify-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.grid-column{
+    width: calc((50% - 25px) * 1 + 0px);
+    padding-bottom: 25px;
+    margin-right: 12px;
+    margin-left: 12px;
+}
+
+.screen-title {
+    padding-top: 80px;
+    font-size: 2em;
+    font-weight: bolder;
+    margin-bottom: 25px;
+    color: #232C4B;
+    justify-content: center;
+    display: flex;
+}

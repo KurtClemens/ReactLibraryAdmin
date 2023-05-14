@@ -1,0 +1,42 @@
+.custom-actions-cells {
+    min-width: 200px !important;
+    justify-content: end !important;
+}
+
+.custom-subject-cells {
+    width: 400px !important;
+    min-width: 150px !important;
+    max-width: none !important;
+}
+
+.custom-author-cells {
+    width: 400px !important;
+    min-width: 150px !important;
+    max-width: none !important;
+}
+
+.custom-title-cells {
+    width: 500px !important;
+    min-width: 150px !important;
+    max-width: none !important;
+}
+
+.custom-button {
+    background-color: transparent !important;
+    width: 20px !important;
+    color: #232c4b !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    display: contents !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.render-button-strong{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.datagrid-div{
+    margin-top: 10px;
+}
+

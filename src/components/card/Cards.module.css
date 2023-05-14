@@ -1,0 +1,28 @@
+.card{
+    width: 100%;
+    margin-right: 25px;
+    margin-top: 25px;
+        justify-items: center;
+        display:grid;
+        height: calc(200px);
+}
+
+.card-container{
+
+     align-items: center;
+     padding: 0;
+     margin: 0;
+     display:grid;
+}
+
+.card-actions{
+    display: inline-grid;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-button{
+    color: #fff !important;
+    background-color: #232c4b !important;
+}

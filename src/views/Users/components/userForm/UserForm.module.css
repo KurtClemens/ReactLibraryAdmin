@@ -1,0 +1,72 @@
+.screen-title {
+    padding-top: 80px;
+    font-size: 2em;
+    font-weight: bolder;
+    margin-bottom: 45px;
+    color: #232C4B;
+    justify-content: center;
+    display: flex;
+}
+
+p {
+    font-family: Lato;
+}
+
+#root {
+    padding: 30px;
+}
+
+.register-form {
+    padding-top: 10px;
+    width: fit-content;
+    margin: auto;
+    z-index: 10;
+}
+
+.formcontrol {
+    margin-top: 20px !important;
+    width: 500px;
+    margin: auto;
+}
+
+.error {
+    border-color: red !important;
+}
+
+.card-button {
+    color: #fff !important;
+    background-color: #232c4b !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.button-div {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+
+.list-item {
+    display: inline-block !important;
+}
+
+.error {
+    border-color: red !important;
+    color: yellow !important;
+}
+
+.column1 {
+    display: inline-block !important;
+    margin-left: 30px !important;
+    ;
+    margin-right: 30px !important;
+}
+
+.column2 {
+    display: inline-block !important;
+    margin-left: 30px !important;
+    margin-right: 30px !important;
+    vertical-align: top !important;
+}
