@@ -63,7 +63,6 @@ const UserForm = ({ readOnly, title, buttonText, cancelButtonText, selectedUser 
 
 
     const onSubmit = (data: UserSubmitForm) => {
-        console.log('in submit')
         let user: UserDao = {
             name: data.name,
             firstName: data.firstName,
@@ -72,9 +71,6 @@ const UserForm = ({ readOnly, title, buttonText, cancelButtonText, selectedUser 
             active: data.active,
             role: data.role
         }
-
-        console.log(data)
-        console.log(user)
 
         const userToAdd: AddUserRequest = {
             userDao: user

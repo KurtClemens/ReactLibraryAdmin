@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import * as Yup from 'yup';
 import styles from './LoanForm.module.css'
-import { BookRequestControllerApi, BookRequestDto, LoanControllerApi, LoanDto } from '../../../../shared/restApiClient';
+import { BookRequestControllerApi, BookRequestDto, LoanControllerApi, LoanDao, LoanDto, UpdateLoanRequest } from '../../../../shared/restApiClient';
 import { Grid, FormControl, InputLabel, OutlinedInput, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box, Container, FormHelperText, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 
 type LoanProps = LoanDto;
@@ -32,8 +33,6 @@ type LoanFormProps = {
 
 
 const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan }: LoanFormProps) => {
-   
-    console.log(new Date().toISOString().substring(0, 16))
 
     const navigate = useNavigate();
     const loanController = new LoanControllerApi();
@@ -41,12 +40,29 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
     const [open, setOpen] = useState(false)
     const [dialogTitle, setDialogTitle] = useState('')
     const [dialogMessage, setDialogMessage] = useState('')
+    const [updated, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
     const [defaultLoan, setDefaultLoan] = useState<LoanDto>(Object);
     const [defaultDateBorrowed, setDefaultDateBorrowed] = useState(new Date(selectedLoan.dateBorrowed).toISOString().substring(0, 16))
     const [defaultReturnDate, setDefaultReturnDate] = useState(new Date(selectedLoan.dateToReturn).toISOString().substring(0, 16))
     const [defaultDateReturned, setDefaultDateReturned] = useState('dd/mm/yyy --:--')
 
+    const validationSchema = Yup.object().shape({
+        userEmail: Yup.string()
+            .required('Required field'),
+        dateBorrowed: Yup.string()
+            .required('Required field'),
+        dateToReturn: Yup.string()
+            .required('Required field'),
+        extended: Yup.boolean()
+            .required('Required field'),
+        bookTitle: Yup.string()
+            .required('Required field'),
+        bookIsbn: Yup.string()
+            .required('Required field'),
+        bookOnShelveOffice: Yup.string()
+            .required('Required field'),
+    });
 
     const {
         register,
@@ -54,6 +70,7 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
         formState: { errors }
     } = useForm<LoanSubmitForm>({
         values: selectedLoan,
+        resolver: yupResolver(validationSchema),
     });
 
 
@@ -74,13 +91,42 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                 }));
 
             }
+            if(selectedLoan.dateReturned !== undefined){
+                setDefaultDateReturned(new Date(selectedLoan.dateReturned).toISOString().substring(0, 16))
+            }
         };
         api();
     }, [selectedLoan]);
 
-    const onSubmit = (data: LoanSubmitForm) => {
 
-        console.log('in submit')
+    const onSubmit = (data: LoanSubmitForm) => {
+        let dateReturned = undefined
+        if (defaultDateReturned !== 'dd/mm/yyy --:--'){
+            dateReturned = new Date(defaultDateReturned)
+        }
+        let loan : LoanDao={
+            id: selectedLoan.id,
+            extended: data.extended,
+            userEmail: data.userEmail,
+            bookTitle: data.bookTitle,
+            bookIsbn: data.bookIsbn,
+            bookOnShelveOffice: data.bookOnShelveOffice,
+            bookOnShelveId: selectedLoan.bookOnShelveId,
+            dateBorrowed: new Date(defaultDateBorrowed),
+            dateToReturn: new Date(defaultReturnDate),
+            dateReturned: dateReturned
+        }
+
+        console.log(loan)
+
+        let loanToUpdate: UpdateLoanRequest = {
+            loanId: selectedLoan.id,
+            loanDao: loan
+        }
+
+        loanController.updateLoan(loanToUpdate)
+        navigate('/loans')
+        forceUpdate();
     }
 
     return (
@@ -100,7 +146,10 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                             label="user"
                                             id="user"
                                             {...register('userEmail')}
+                                            error={errors.userEmail?.type === 'required'}
                                         />
+                                        <FormHelperText error id="component-error-text">{errors.userEmail?.message}</FormHelperText>
+
                                     </FormControl>
 
                                     <FormControl className={styles['formcontrol']}>
@@ -110,10 +159,14 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                             id="dateBorrowed"
                                             label="dateBorrowed"
                                             value={defaultDateBorrowed}
+                                            {...register('dateBorrowed')}
                                             onChange={(e)=>{
                                                 setDefaultDateBorrowed(e.target.value)
                                             }}
+                                            error={errors.dateBorrowed?.type === 'required'}
                                         />
+                                        <FormHelperText error id="component-error-text">{errors.dateBorrowed?.message}</FormHelperText>
+
                                     </FormControl>
 
                                     <FormControl className={styles['formcontrol']}>
@@ -123,10 +176,14 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                             id="dateToReturn"
                                             label="dateToReturn"
                                             value={defaultReturnDate}
+                                            {...register('dateToReturn')}
                                             onChange={(e) => {
                                                 setDefaultReturnDate(e.target.value)
                                             }}
+                                            error={errors.dateToReturn?.type === 'required'}
                                         />
+                                        <FormHelperText error id="component-error-text">{errors.dateToReturn?.message}</FormHelperText>
+
                                     </FormControl>
 
                                     <FormControl className={styles['formcontrol']}>
@@ -136,6 +193,7 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                             id="dateReturned"
                                             label="dateReturned"
                                             value={defaultDateReturned}
+                                            {...register('dateReturned')}
                                             onChange={(e) => {
                                                 console.log(e.target.value)
                                                 if(e.target.value === ''){
@@ -143,7 +201,8 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                                 }else{
                                                 setDefaultDateReturned(e.target.value)
                                                 }
-                                            }}                                        />
+                                            }}                                        
+                                        />
                                     </FormControl>
 
                                     <FormControl className={styles['formcontrol']}>
@@ -152,7 +211,9 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                             id="extended"
                                             label="extended"
                                             {...register('extended')}
+                                            error={errors.extended?.type === 'required'}
                                         />
+                                        <FormHelperText error id="component-error-text">{errors.extended?.message}</FormHelperText>
                                     </FormControl>
 
                                     <FormControl className={styles['formcontrol']}>
@@ -161,7 +222,10 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                             id="bookTitle"
                                             label="bookTitle"
                                             {...register('bookTitle')}
+                                            error={errors.bookTitle?.type === 'required'}
                                         />
+                                        <FormHelperText error id="component-error-text">{errors.bookTitle?.message}</FormHelperText>
+
                                     </FormControl>
 
                                     <FormControl className={styles['formcontrol']}>
@@ -170,7 +234,10 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                             id="bookIsbn"
                                             label="bookIsbn"
                                             {...register('bookIsbn')}
+                                            error={errors.bookIsbn?.type === 'required'}
                                         />
+                                        <FormHelperText error id="component-error-text">{errors.bookIsbn?.message}</FormHelperText>
+
                                     </FormControl>
 
                                     <FormControl className={styles['formcontrol']}>
@@ -179,7 +246,10 @@ const LoanForm = ({ readOnly, title, buttonText, cancelButtonText, selectedLoan 
                                             id="office"
                                             label="office"
                                             {...register('bookOnShelveOffice')}
+                                            error={errors.bookOnShelveOffice?.type === 'required'}
                                         />
+                                        <FormHelperText error id="component-error-text">{errors.bookOnShelveOffice?.message}</FormHelperText>
+
                                     </FormControl>
 
                                 </Grid>
