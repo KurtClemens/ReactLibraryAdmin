@@ -13,6 +13,7 @@ import CreateReadUpdateUser from "./views/Users/pages/create-read-update-user/Cr
 import Office from "./views/offices/pages/Office";
 import CreateReadUpdateOffice from "./views/offices/pages/create-read-update-office/CreateReadUpdateOffice";
 import ReadRequest from "./views/Requests/pages/read-request/ReadRequest";
+import ReadUpdateLoan from "./views/Loans/pages/read-update-loan/ReadUpdateLoan";
 
 // interface
 interface Route {
@@ -72,6 +73,20 @@ export const routes: Array<Route> = [
     path: "/loans",
     enabled: true,
     component: Loans,
+  },
+  {
+    key: "read-loan-route",
+    title: "Read Loan",
+    path: "/loans/:id",
+    enabled: true,
+    component: ReadUpdateLoan,
+  },
+  {
+    key: "edit-loan-route",
+    title: "Edit Loan",
+    path: "/loans/edit/:id",
+    enabled: true,
+    component: ReadUpdateLoan,
   },
   {
     key: "requests-route",

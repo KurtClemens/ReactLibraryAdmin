@@ -36,7 +36,6 @@ const RequestForm = ({ readOnly, title, buttonText, cancelButtonText, selectedRe
 
     const navigate = useNavigate();
     const requestController = new BookRequestControllerApi();
-    const [added, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
     const [open, setOpen] = useState(false)
     const [dialogTitle, setDialogTitle] = useState('')

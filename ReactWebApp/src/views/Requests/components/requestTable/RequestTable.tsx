@@ -108,14 +108,6 @@ const RequestTable = () => {
         );
     };
 
-    const sendMessage = async (rowId: any) => {
-        setConfirmDialog({
-            ...confirmDialog,
-            isOpen: false
-        })
-
-        forceUpdate();
-    }
 
     const columns: GridColDef[] = [
         {
