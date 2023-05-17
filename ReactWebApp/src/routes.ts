@@ -14,6 +14,7 @@ import Office from "./views/offices/pages/Office";
 import CreateReadUpdateOffice from "./views/offices/pages/create-read-update-office/CreateReadUpdateOffice";
 import ReadRequest from "./views/Requests/pages/read-request/ReadRequest";
 import ReadUpdateLoan from "./views/Loans/pages/read-update-loan/ReadUpdateLoan";
+import Login from "./views/login/pages/Login";
 
 // interface
 interface Route {
@@ -164,5 +165,12 @@ export const routes: Array<Route> = [
     path: "/requests/:id",
     enabled: true,
     component: ReadRequest,
+  },
+  {
+    key: "login-route",
+    title: "Login",
+    path: "/login",
+    enabled: true,
+    component: Login,
   },
 ];

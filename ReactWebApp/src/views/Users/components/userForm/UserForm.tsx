@@ -37,20 +37,40 @@ const UserForm = ({ readOnly, title, buttonText, cancelButtonText, selectedUser 
     const [dialogMessage, setDialogMessage] = useState('')
 
     const emailRegex = new RegExp('[A-Za-zÀ-ÖØ-öø-ū0-9_.+]+@(inetum-realdolmen.world|realdolmen.com)')
+    let validationSchema;
 
-    const validationSchema = Yup.object().shape({
-        name: Yup.string()
-            .required('Required field')
-            .min(2, 'Name must be at least 2 characters'),
-        firstName: Yup.string()
-            .required('Required field')
-            .min(2, 'First name must be at least 2 characters'),
-        email: Yup.string()
-            .required('Required field')
-            .matches(emailRegex, 'Email must be of format @inetum-realdolmen.world or @realdolmen.com'),
-        role: Yup.string()
-            .required('Required field'),          
+    if(selectedUser.id === 0){
+         validationSchema = Yup.object().shape({
+            name: Yup.string()
+                .required('Required field')
+                .min(2, 'Name must be at least 2 characters'),
+            firstName: Yup.string()
+                .required('Required field')
+                .min(2, 'First name must be at least 2 characters'),
+            email: Yup.string()
+                .required('Required field')
+                .matches(emailRegex, 'Email must be of format @inetum-realdolmen.world or @realdolmen.com'),
+            role: Yup.string()
+                .required('Required field'),
+            password: Yup.string()
+                .required('Required field')
         });
+    }else{
+         validationSchema = Yup.object().shape({
+            name: Yup.string()
+                .required('Required field')
+                .min(2, 'Name must be at least 2 characters'),
+            firstName: Yup.string()
+                .required('Required field')
+                .min(2, 'First name must be at least 2 characters'),
+            email: Yup.string()
+                .required('Required field')
+                .matches(emailRegex, 'Email must be of format @inetum-realdolmen.world or @realdolmen.com'),
+            role: Yup.string()
+                .required('Required field'),
+        });
+    }
+
 
     const {
         register,

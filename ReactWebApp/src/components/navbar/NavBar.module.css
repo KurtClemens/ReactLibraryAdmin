@@ -41,6 +41,6 @@ a:focus, a:hover {
 a{
     text-decoration: none !important;
     color: #013C66 !important;
-    font-size:larger !important;
+    font-size:medium !important;
     font-weight:500 !important;
 }

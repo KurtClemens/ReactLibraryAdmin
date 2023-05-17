@@ -1,0 +1,39 @@
+.screen-title {
+    padding-top: 180px;
+    font-size: 2em;
+    font-weight: bolder;
+    color: #00AA9A;
+    justify-content: center;
+    display: flex;
+}
+.login-form {
+    padding-top: 10px;
+    width: fit-content;
+    margin: auto;
+    z-index: 10;
+}
+
+.formcontrol {
+    margin-top: 20px !important;
+    width: 400px;
+    margin: auto;
+}
+
+.error {
+    border-color: red !important;
+}
+
+.card-button {
+    color: #fff !important;
+    background-color: #232c4b !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.button-div {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
