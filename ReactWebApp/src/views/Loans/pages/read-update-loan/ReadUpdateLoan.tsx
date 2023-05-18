@@ -3,6 +3,7 @@ import LoanForm from '../../components/loanForm/LoanForm';
 import styles from './ReadUpdateLoan.module.css'
 import { BookRequestDto, GetBookRequestByIdRequest, GetLoanByIdRequest, LoanControllerApi, LoanDto } from '../../../../shared/restApiClient';
 import { useLocation, useParams } from 'react-router-dom';
+import Layout from '../../../layout/Layout';
 
 
 let readOnly;
@@ -64,7 +65,9 @@ const ReadUpdateLoan = () => {
 
 
     return (
-        selectedLoan ? <LoanForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedLoan={selectedLoan} ></LoanForm> : <div className={styles['screen-title']}>Loading ...</div>
+        selectedLoan ? <Layout>
+            <LoanForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedLoan={selectedLoan} ></LoanForm>     </Layout>
+: <div className={styles['screen-title']}>Loading ...</div>
     )
 }
 

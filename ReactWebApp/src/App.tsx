@@ -31,9 +31,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
 
-        <NavBar></NavBar>
         <Router>
-          <Layout>
             <Routes>
               {appRoutes.map((route) => (
                 <Route
@@ -43,7 +41,6 @@ function App() {
                 />
               ))}
             </Routes>
-          </Layout>
         </Router>
       </ThemeProvider>
 

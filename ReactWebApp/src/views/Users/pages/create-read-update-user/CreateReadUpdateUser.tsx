@@ -3,6 +3,7 @@ import UserForm from '../../components/userForm/UserForm'
 import styles from './CreateReadUpdateUser.module.css'
 import { useLocation, useParams } from 'react-router'
 import { GetUserByIdRequest, UserControllerApi, UserDto } from '../../../../shared/restApiClient'
+import Layout from '../../../layout/Layout'
 
 let readOnly;
 let title;
@@ -65,7 +66,11 @@ const CreateReadUpdateUser = () => {
 
 
   return (
-      selectedUser ? <UserForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedUser={selectedUser}></UserForm> : <div className={styles['screen-title']}>Loading ...</div>
+    
+      selectedUser ?
+          <Layout>
+              <UserForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedUser={selectedUser}></UserForm>    </Layout>
+ : <div className={styles['screen-title']}>Loading ...</div>
   )
 }
 

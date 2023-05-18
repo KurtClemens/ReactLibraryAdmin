@@ -7,6 +7,7 @@ import { Grid, FormControl, InputLabel, OutlinedInput, FormHelperText, Button } 
 import { title } from 'process';
 import { LoginControllerApi, LoginRequest, UserDao } from '../../../shared/restApiClient';
 import { useNavigate } from 'react-router';
+import LoginLayout from '../../layout/LoginLayout';
 
 type LoginSubmitForm = {
     email: string;
@@ -57,6 +58,7 @@ const Login = () => {
     
   return (
         <>
+        <LoginLayout>
           <div className={styles['screen-title']}>User Login</div>
           <form className={styles['login-form']} onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2} >
@@ -95,6 +97,7 @@ const Login = () => {
                   </Button>
               </div>
               </form>
+          </LoginLayout>
           </>
   )
 }

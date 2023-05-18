@@ -3,6 +3,7 @@ import styles from './CreateReadUpdateBook.module.css'
 import { useLocation, useParams } from 'react-router'
 import BookForm from '../../components/bookForm/BookForm'
 import { AuthorDto, BookControllerApi, BookDto, BookOnShelveDto, GetBookByIdRequest, OfficeDto, PublisherDto, SubjectDto } from '../../../../shared/restApiClient';
+import Layout from '../../../layout/Layout';
 let readOnly;
 let title;
 let buttonText;
@@ -96,7 +97,9 @@ const CreateReadUpdateBook = () => {
         cancelButtonText = 'Return'
     }
   return (
-     selectedBook ? <BookForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedBook={selectedBook}></BookForm> : <div className={styles['screen-title']}>Loading ...</div>
+      selectedBook ? <Layout>
+          <BookForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedBook={selectedBook}></BookForm>    </Layout>
+ : <div className={styles['screen-title']}>Loading ...</div>
   )
 }
 

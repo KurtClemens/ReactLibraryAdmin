@@ -3,6 +3,7 @@ import { GetOfficeByIdRequest, OfficeControllerApi, OfficeDto } from '../../../.
 import OfficeForm from '../../components/officeForm/OfficeForm';
 import { useLocation, useParams } from 'react-router-dom';
 import styles from './CreateReadUpdateOffice.module.css'
+import Layout from '../../../layout/Layout';
 
 let readOnly;
 let title;
@@ -64,7 +65,9 @@ const CreateReadUpdateOffice = () => {
 
 
     return (
-        selectedOffice ? <OfficeForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedOffice={selectedOffice}></OfficeForm> : <div className={styles['screen-title']}>Loading ...</div>
+        selectedOffice ? <Layout>
+            <OfficeForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedOffice={selectedOffice}></OfficeForm>     </Layout>
+ : <div className={styles['screen-title']}>Loading ...</div>
     )
 }
 

@@ -3,6 +3,7 @@ import { BookRequestControllerApi, BookRequestDto, GetBookRequestByIdRequest } f
 import { useLocation, useParams } from 'react-router-dom';
 import styles from './ReadRequest.module.css'
 import RequestForm from '../../components/requestForm/RequestForm';
+import Layout from '../../../layout/Layout';
 
 let readOnly;
 let title;
@@ -58,7 +59,9 @@ const ReadRequest = () => {
 
 
     return (
-        selectedRequest ? <RequestForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedRequest={selectedRequest} ></RequestForm> : <div className={styles['screen-title']}>Loading ...</div>
+        selectedRequest ? <Layout>
+            <RequestForm readOnly={readOnly} title={title} buttonText={buttonText} cancelButtonText={cancelButtonText} selectedRequest={selectedRequest} ></RequestForm>     </Layout>
+ : <div className={styles['screen-title']}>Loading ...</div>
     )
 }
 
