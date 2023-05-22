@@ -31,7 +31,14 @@ export const routes: Array<Route> = [
     title: "Home",
     path: "/",
     enabled: true,
-    component: Dashboard,
+    component: Login,
+  },
+  {
+    key: "default-route",
+    title: "Home",
+    path: "*",
+    enabled: true,
+    component: Login,
   },
   {
     key: "home-route",
